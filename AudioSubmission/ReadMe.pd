@@ -1,0 +1,17 @@
+#N canvas 686 162 450 300 10;
+#X text 10 21 For the purposes of this submission \, you are give the
+option to choose your own sound track to play. You can use any audio
+format \, though .wav would be recommended.;
+#X text 14 72 To begin \, please select the bang object at the top.
+This will bring up a window that allows you to choose a sound track.
+Please select one. After this you will be able to hear the soundtrack
+and modify it with the sliders provided.;
+#X text 15 148 If you are unable to hear the soundtrack please follow
+these steps and the sound should be hearable. Please ensure that your
+volume is fairly low on your machine so as to avoid any shocks if the
+sound pops in suddenly.;
+#X text 19 220 1 Ensure that the DNS is on for your Pure Data Application.
+You can do this through PD's main window or by pressing Ctrl+/ symbols
+simultaneously. 2 Check if the volume on the patch is too low. 3 Each
+slider may need to adjusted in order to initialize them. Trying the
+Low_Pass slider first may achieve this.;

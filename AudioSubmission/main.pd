@@ -1,0 +1,167 @@
+#N canvas 0 4 1366 686 10;
+#X obj 219 578 dac~;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array SongWave 8.46605e+006 float 2;
+#X coords 0 1 8.46605e+006 -1 200 140 1;
+#X restore 699 151 graph;
+#X obj 204 67 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#N canvas 539 373 450 300 volume 0;
+#X obj 107 139 *~;
+#X obj 73 53 \$1 20;
+#X obj 74 91 line~;
+#X obj 73 14 inlet;
+#X obj 136 15 inlet~;
+#X obj 107 182 outlet~;
+#X connect 0 0 5 0;
+#X connect 1 0 2 0;
+#X connect 2 0 0 1;
+#X connect 3 0 1 0;
+#X connect 4 0 0 0;
+#X restore 220 244 pd volume;
+#X obj 146 113 vsl 15 128 0 100 0 0 empty empty Volume 0 -9 0 10 -262144
+-1 -1 0 1;
+#N canvas 833 184 450 300 openAudioFile 0;
+#X obj 75 140 soundfiler;
+#X obj 75 173 expr 44100 / $f1;
+#X obj 74 30 inlet;
+#X obj 75 209 outlet;
+#X obj 142 210 outlet;
+#X obj 76 73 openpanel;
+#X msg 74 107 read -resize \$1 SongWave;
+#X connect 0 0 1 0;
+#X connect 0 0 4 0;
+#X connect 1 0 3 0;
+#X connect 2 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 0 0;
+#X restore 204 114 pd openAudioFile;
+#N canvas 720 291 450 300 readAudioFile 0;
+#X obj 67 22 inlet;
+#X obj 67 98 *;
+#X obj 67 132 phasor~;
+#X obj 67 167 *~;
+#X floatatom 67 56 5 0 0 0 - - -;
+#X obj 129 62 t b f;
+#X obj 123 23 inlet;
+#X obj 191 24 inlet;
+#X obj 66 242 outlet~;
+#X obj 175 165 unsig~ 50;
+#X obj 196 202 outlet;
+#X obj 67 200 tabread4~ SongWave;
+#X text 217 78 Used to convert file so the song wave and song progression
+slider can be displayed;
+#X connect 0 0 4 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 9 0;
+#X connect 3 0 11 0;
+#X connect 4 0 1 0;
+#X connect 5 0 4 0;
+#X connect 5 1 1 1;
+#X connect 6 0 5 0;
+#X connect 7 0 3 1;
+#X connect 9 0 10 0;
+#X connect 11 0 8 0;
+#X restore 204 171 pd readAudioFile;
+#X obj 702 295 hsl 195 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 375 157 hsl 128 15 -2 2 0 0 empty empty Tempo -2 -8 0 10 -262144
+-1 -1 0 1;
+#X msg 351 108 1;
+#X obj 375 466 hsl 128 15 -50 50 0 0 empty empty High_pass -2 -8 0
+10 -262144 -1 -1 0 1;
+#X obj 376 526 hsl 128 15 -50 50 0 0 empty empty Low_pass -2 -8 0 10
+-262144 -1 -1 0 1;
+#X obj 220 471 hip~;
+#X obj 219 505 lop~;
+#X text 518 480 These were originally receive objects that caught the
+height of the player and lift game objects within the game that simulated
+these sliders;
+#X text 699 314 Represents the modified file fot Testing Purposes and
+possible display as a background or mini-map in the game for player
+reference;
+#X floatatom 372 182 5 0 0 0 - - -;
+#N canvas 543 55 685 521 reverb 0;
+#X obj 187 349 freeverb~;
+#X msg 239 89 damping \$1;
+#X msg 298 163 wet \$1;
+#X msg 297 184 dry \$1;
+#X msg 378 247 freeze \$1;
+#X msg 393 320 bypass \$1;
+#X obj 358 167 expr 1-$f1;
+#X obj 187 30 inlet~;
+#X obj 186 396 outlet~;
+#X obj 358 127 inlet;
+#X obj 239 54 inlet;
+#X obj 464 297 inlet;
+#X obj 439 207 inlet;
+#X connect 0 0 8 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 0 0;
+#X connect 6 0 3 0;
+#X connect 7 0 0 0;
+#X connect 9 0 2 0;
+#X connect 9 0 6 0;
+#X connect 10 0 1 0;
+#X connect 11 0 5 0;
+#X connect 12 0 4 0;
+#X restore 219 405 pd reverb;
+#X floatatom 372 488 5 0 0 0 - - -;
+#X floatatom 373 546 5 0 0 0 - - -;
+#X floatatom 146 253 5 0 0 0 - - -;
+#X obj 376 347 hsl 128 15 0 127 0 0 empty empty Damping_level -2 -8
+0 10 -262144 -1 -1 0 1;
+#X obj 375 407 hsl 128 15 0 127 0 0 empty empty Wet_or_Dry -2 -8 0
+10 -262144 -1 -1 0 1;
+#X text 516 396 Wet signal to dry signal ratio;
+#X floatatom 373 367 5 -50 50 0 - - -;
+#X floatatom 372 429 5 0 0 0 - - -;
+#X obj 177 346 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 177 390 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 78 344 Freezing Reverb;
+#X text 3 395 the dry signal pass through.;
+#X text -67 3 comment;
+#X obj 200 40 ReadMe;
+#X text 391 99 This slider would be effected by the player's general
+movement and which direction they were moving in. Left would be into
+the negatives \, right Positive.;
+#X text 2 382 Turn the reverb off and let;
+#X text 30 298 These effects would occur when the player interacted
+with some objects.;
+#X text 514 411 (0 : all dry \, 1 : all wet);
+#X text 514 354 These Sliders would be affected if the player moved
+into a water area;
+#X text 348 86 Reset the tempo to normal by pressing this;
+#X text 516 344;
+#X connect 2 0 5 0;
+#X connect 2 0 9 0;
+#X connect 3 0 17 0;
+#X connect 4 0 3 0;
+#X connect 4 0 20 0;
+#X connect 5 0 6 0;
+#X connect 5 1 6 2;
+#X connect 6 0 3 1;
+#X connect 6 1 7 0;
+#X connect 8 0 6 1;
+#X connect 8 0 16 0;
+#X connect 9 0 8 0;
+#X connect 10 0 12 1;
+#X connect 10 0 18 0;
+#X connect 11 0 13 1;
+#X connect 11 0 19 0;
+#X connect 12 0 13 0;
+#X connect 13 0 0 0;
+#X connect 13 0 0 1;
+#X connect 17 0 12 0;
+#X connect 21 0 17 1;
+#X connect 21 0 24 0;
+#X connect 22 0 17 2;
+#X connect 22 0 25 0;
+#X connect 26 0 17 3;
+#X connect 27 0 17 4;
